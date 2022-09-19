@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/bin/Debug/net6.0
+/obj
+/_ReSharper.Caches/ReSharperPlatformVs17221_1487e10d.resilient_client_sample.00
+
+source/resilient_client_example/bin/
+
+source/resilient_client_example/obj/
+
+source/SampleEndpoint/bin/
+
+source/SampleEndpoint/obj/
