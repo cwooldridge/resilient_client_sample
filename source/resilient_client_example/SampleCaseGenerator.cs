@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace resilient_client_sample
 {
@@ -19,7 +15,6 @@ namespace resilient_client_sample
 
         public void Start(CancellationToken cancellationToken)
         {
-
             var t = new Thread(Start)
             {
                 IsBackground = true
@@ -31,15 +26,14 @@ namespace resilient_client_sample
         {
             var token = (CancellationToken)obj;
             var random = new Random(DateTime.Now.Second);
-            
+
             while (!token.IsCancellationRequested)
             {
                 var wait = random.Next(2000, 6000);
                 Thread.Sleep(wait);
                 var caseMessage = CaseMessage.MakeTestCase();
-                ConsoleHelper.WriteLineInColor("Case " + caseMessage.CaseId + " created",ConsoleColor.Green);
+                ConsoleHelper.WriteLineInColor("Case " + caseMessage.SerialNumber + " created", ConsoleColor.Green);
                 _messageQueue.Enqueue(caseMessage);
-             
             }
         }
     }

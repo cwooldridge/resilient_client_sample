@@ -1,25 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-namespace SampleEndpoint.Controllers;
-
-[ApiController]
-[Route("case_report")]
-public class CaseReportController : ControllerBase
+namespace SampleEndpoint.Controllers
 {
 
-
-    private readonly ILogger<CaseReportController> _logger;
-
-    public CaseReportController(ILogger<CaseReportController> logger)
+    [ApiController]
+    [Route("case_report")]
+    public class CaseReportController : ControllerBase
     {
-        _logger = logger;
-    }
 
-      
-    [HttpPost]
-    public  ActionResult<CaseMessage> PostCaseMessage(CaseMessage caseMessage)
-    {
-        _logger.LogInformation("Received Case " + caseMessage);
-        return CreatedAtAction(nameof(PostCaseMessage), new { id = caseMessage.CaseId }, caseMessage);
+
+        private readonly ILogger<CaseReportController> _logger;
+
+        public CaseReportController(ILogger<CaseReportController> logger)
+        {
+            _logger = logger;
+        }
+
+
+        [HttpPost]
+        public ActionResult<CaseMessage> PostCaseMessage(CaseMessage caseMessage)
+        {
+            _logger.LogInformation("Received Case " + caseMessage);
+            return CreatedAtAction(nameof(PostCaseMessage), new { id = caseMessage.SerialNumber }, caseMessage);
+        }
     }
 }
